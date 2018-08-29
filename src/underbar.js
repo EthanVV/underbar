@@ -15,11 +15,6 @@
     return (n === undefined) ? array[array.length - 1] : array.slice(startIndex);
   };
 
-  // Call iterator(value, key, collection) for each element of collection.
-  // Accepts both arrays and objects.
-  //
-  // Note: _.each does not have a return value, but rather simply runs the
-  // iterator function over each item in the input collection.
   _.each = function(collection, iterator) {
     if (Array.isArray(collection)) {
       for (var i = 0; i < collection.length; i++) {
@@ -51,6 +46,11 @@
 
   // Return all elements of an array that pass a truth test.
   _.filter = function(collection, test) {
+    var passedTest = [];
+    _.each(collection, function(item) {
+      if (test(item)) passedTest.push(item);
+    });
+    return passedTest;
   };
 
   // Return all elements of an array that don't pass a truth test.

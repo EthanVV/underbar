@@ -52,9 +52,7 @@
     return _.filter(collection, testFailed);
   };
 
-  // Produce a duplicate-free version of the array.
   _.uniq = function(array, isSorted, iterator) {
-    // need to implement second algorithm for sorted arrays
     var uniques = array.slice();
     var match = function(a, b) {
       if (iterator !== undefined) {
@@ -81,6 +79,11 @@
     // map() is a useful primitive iteration function that works a lot
     // like each(), but in addition to running the operation on all
     // the members, it also maintains an array of results.
+    var newCollection = [];
+    _.each(collection, function(item, key, collection) {
+      newCollection.push(iterator(item));
+    });
+    return newCollection;
   };
 
   /*

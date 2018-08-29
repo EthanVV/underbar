@@ -29,13 +29,11 @@
 
   _.indexOf = function(array, target){
     var result = -1;
-
     _.each(array, function(item, index) {
       if (item === target && result === -1) {
         result = index;
       }
     });
-
     return result;
   };
 
@@ -56,6 +54,25 @@
 
   // Produce a duplicate-free version of the array.
   _.uniq = function(array, isSorted, iterator) {
+    // need to implement second algorithm for sorted arrays
+    var uniques = array.slice();
+    var match = function(a, b) {
+      if (iterator !== undefined) {
+        return iterator(a) === iterator(b);
+      } else {
+        return a === b;
+      }
+    };
+
+    for (var i = 0; i < uniques.length; i++) {
+      for (var j = i + 1; j < uniques.length; j++) {
+        if (match(uniques[i], uniques[j])) {
+          uniques.splice(j, 1);
+          j--;
+        }
+      }
+    }
+    return uniques;
   };
 
 

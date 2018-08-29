@@ -9,7 +9,7 @@
   _.first = function(array, n) {
     return (n === undefined) ? array[0] : array.slice(0, n);
   };
-  
+
   _.last = function(array, n) {
     var startIndex = (n > array.length) ? 0 : array.length - n;
     return (n === undefined) ? array[array.length - 1] : array.slice(startIndex);
@@ -21,6 +21,15 @@
   // Note: _.each does not have a return value, but rather simply runs the
   // iterator function over each item in the input collection.
   _.each = function(collection, iterator) {
+    if (Array.isArray(collection)) {
+      for (var i = 0; i < collection.length; i++) {
+        iterator(collection[i], i, collection);
+      }
+    } else {
+      for (var key in collection) {
+        iterator(collection[key], key, collection);
+      }
+    }
   };
 
   // Returns the index at which value can be found in the array, or -1 if value

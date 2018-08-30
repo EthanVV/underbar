@@ -110,9 +110,11 @@
   };
 
   _.every = function(collection, iterator) {
+    if (iterator === undefined) {
+      iterator = _.identity;
+    }
     return _.reduce(collection, function(collectionStatus, item) {
-      var itemStatus = (iterator !== undefined) ? !!iterator(item): !!item;
-      return collectionStatus && itemStatus;
+      return collectionStatus && !!iterator(item);
     }, true);
   };
 

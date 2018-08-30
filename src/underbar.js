@@ -81,44 +81,12 @@
     return newCollection;
   };
 
-  /*
-   * TIP: map is really handy when you want to transform an array of
-   * values into a new array of values. _.pluck() is solved for you
-   * as an example of this.
-   */
-
-  // Takes an array of objects and returns and array of the values of
-  // a certain property in it. E.g. take an array of people and return
-  // an array of just their ages
   _.pluck = function(collection, key) {
-    // TIP: map is really handy when you want to transform an array of
-    // values into a new array of values. _.pluck() is solved for you
-    // as an example of this.
     return _.map(collection, function(item){
       return item[key];
     });
   };
 
-  // Reduces an array or object to a single value by repetitively calling
-  // iterator(accumulator, item) for each item. accumulator should be
-  // the return value of the previous iterator call.
-  //  
-  // You can pass in a starting value for the accumulator as the third argument
-  // to reduce. If no starting value is passed, the first element is used as
-  // the accumulator, and is never passed to the iterator. In other words, in
-  // the case where a starting value is not passed, the iterator is not invoked
-  // until the second element, with the first element as its second argument.
-  //  
-  // Example:
-  //   var numbers = [1,2,3];
-  //   var sum = _.reduce(numbers, function(total, number){
-  //     return total + number;
-  //   }, 0); // should be 6
-  //  
-  //   var identity = _.reduce([5], function(total, number){
-  //     return total + number * number;
-  //   }); // should be 5, regardless of the iterator function passed in
-  //          No accumulator is given so the first element is used.
   _.reduce = function(collection, iterator, accumulator) {
     var startUndefined = (accumulator === undefined);
     _.each(collection, function(item, key, collection) {
@@ -148,6 +116,11 @@
   // Determine whether all of the elements match a truth test.
   _.every = function(collection, iterator) {
     // TIP: Try re-using reduce() here.
+    var iteratorUndefined = (iterator === undefined);
+    return _.reduce(collection, function(collectionStatus, item) {
+      var itemStatus = (iterator !== undefined) ? !!iterator(item): !!item;
+      return collectionStatus && itemStatus;
+    }, true);
   };
 
   // Determine whether any of the elements pass a truth test. If no iterator is

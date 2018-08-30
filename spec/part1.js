@@ -392,30 +392,6 @@
       it('should not mutate the input array', function() {
         var input = [1,2,3,4,5];
         var result = _.reduce(input, function(memo, item) {return item;});
-        
-        /*
-         * Mutation of inputs should be avoided without good justification otherwise
-         * as it can often lead to hard to find bugs and confusing code!
-         * Imagine we were reading the code above, and we added the following line:
-         *
-         * var lastElement = input[input.length - 1];
-         *
-         * Without knowing that mutation occured inside of _.reduce,
-         * we would assume that `lastElement` is 5. But if inside of
-         * _.reduce, we use the array method `pop`, we would permanently
-         * change `input` and our assumption would not longer be true,
-         * `lastElement` would be 4 instead!
-         *
-         * The tricky part is that we have no way of knowing about the mutation
-         * just by looking at the code above. We'd have to dive into the
-         * implementation of _.reduce to the exact line that uses `pop`.
-         * If we write a lot of code with this assumption, it might be very hard
-         * to trace back to the correct line in _.reduce.
-         *
-         * You can avoid an entire class of bugs by writing functions
-         * that don't mutate their inputs!
-         */
-
         expect(input).to.eql([1,2,3,4,5])
       });
 
@@ -466,7 +442,6 @@
       });
 
       it('should accept falsy values as a valid memo', function() {
-        // Be careful how you check if a memo has been passed in
         var result = _.reduce([1,2,3], function(memo, item) {
           return memo * item;
         }, 0);

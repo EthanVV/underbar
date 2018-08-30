@@ -100,10 +100,7 @@
     return accumulator;
   };
 
-  // Determine if the array or object contains a given value (using `===`).
   _.contains = function(collection, target) {
-    // TIP: Many iteration problems can be most easily expressed in
-    // terms of reduce(). Here's a freebie to demonstrate!
     return _.reduce(collection, function(wasFound, item) {
       if (wasFound) {
         return true;
@@ -112,11 +109,7 @@
     }, false);
   };
 
-
-  // Determine whether all of the elements match a truth test.
   _.every = function(collection, iterator) {
-    // TIP: Try re-using reduce() here.
-    var iteratorUndefined = (iterator === undefined);
     return _.reduce(collection, function(collectionStatus, item) {
       var itemStatus = (iterator !== undefined) ? !!iterator(item): !!item;
       return collectionStatus && itemStatus;
@@ -127,6 +120,7 @@
   // provided, provide a default one
   _.some = function(collection, iterator) {
     // TIP: There's a very clever way to re-use every() here.
+
   };
 
 

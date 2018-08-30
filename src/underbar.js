@@ -113,8 +113,8 @@
     if (iterator === undefined) {
       iterator = _.identity;
     }
-    return _.reduce(collection, function(collectionStatus, item) {
-      return collectionStatus && !!iterator(item);
+    return _.reduce(collection, function(collectionStatus, item, key, collection) {
+      return collectionStatus && !!iterator(item, key, collection);
     }, true);
   };
 

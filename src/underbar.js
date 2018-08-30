@@ -76,7 +76,7 @@
   _.map = function(collection, iterator) {
     var newCollection = [];
     _.each(collection, function(item, key, collection) {
-      newCollection.push(iterator(item));
+      newCollection.push(iterator(item, key, collection));
     });
     return newCollection;
   };
@@ -118,11 +118,13 @@
     }, true);
   };
 
-  // Determine whether any of the elements pass a truth test. If no iterator is
-  // provided, provide a default one
   _.some = function(collection, iterator) {
-    // TIP: There's a very clever way to re-use every() here.
-
+    if (iterator === undefined) {
+      iterator = _.identity;
+    }
+    return !_.every(collection, function(item, key, collection) {
+      return !iterator(item, key, collection);
+    });
   };
 
 

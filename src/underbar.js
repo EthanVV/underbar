@@ -131,7 +131,7 @@
     for (var i = 1; i < arguments.length; i++) {
       var objFromArgs = arguments[i];
       _.each(objFromArgs, function(item, key) {
-       obj[key] = item;
+        obj[key] = item;
       });
     }
     return obj;
@@ -140,6 +140,13 @@
   // Like extend, but doesn't ever overwrite a key that already
   // exists in obj
   _.defaults = function(obj) {
+    for (var i = 1; i < arguments.length; i++) {
+      var objFromArgs = arguments[i];
+      _.each(objFromArgs, function(item, key) {
+        if (obj[key] === undefined) obj[key] = item;
+      });
+    }
+    return obj;
   };
 
 

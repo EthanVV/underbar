@@ -137,8 +137,6 @@
     return obj;
   };
 
-  // Like extend, but doesn't ever overwrite a key that already
-  // exists in obj
   _.defaults = function(obj) {
     for (var i = 1; i < arguments.length; i++) {
       var objFromArgs = arguments[i];
@@ -190,6 +188,14 @@
   // already computed the result for the given argument and return that value
   // instead if possible.
   _.memoize = function(func) {
+    var calls = {};
+    return function() {
+      var args = JSON.stringify(arguments);
+      if (calls[args] === undefined) {
+        calls[args] = func.apply(null, arguments);
+      }
+      return calls[args];
+    }
   };
 
   // Delays a function for the given number of milliseconds, and then calls

@@ -222,7 +222,18 @@
   // TIP: This function's test suite will ask that you not modify the original
   // input array. For a tip on how to make a copy of an array, see:
   // http://mdn.io/Array.prototype.slice
-  _.shuffle = function(array) {
+  _.shuffle = function(array) {;
+    var copy = array.slice();
+    
+    for (var i = 0; i < copy.length - 1; i++) {
+      var random = Math.floor(Math.random() * copy.length - i);
+      var destination = copy.length - 1 - i;
+      var holder = copy[destination]
+
+      copy[destination] = copy[random];
+      copy[random] = holder;
+    }
+    return copy;
   };
 
 

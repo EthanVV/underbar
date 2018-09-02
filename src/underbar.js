@@ -192,7 +192,7 @@
     return function() {
       var args = JSON.stringify(arguments);
       if (calls[args] === undefined) {
-        calls[args] = func.apply(null, arguments);
+        calls[args] = func.apply(this, arguments);
       }
       return calls[args];
     }
@@ -205,6 +205,10 @@
   // parameter. For example _.delay(someFunction, 500, 'a', 'b') will
   // call someFunction('a', 'b') after 500ms
   _.delay = function(func, wait) {
+    var argsToPass = _.map(arguments, item => item).slice(2);
+    return setTimeout(function(){
+      func.apply(this, argsToPass);
+    }, wait);
   };
 
 

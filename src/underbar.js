@@ -147,46 +147,19 @@
     return obj;
   };
 
-
-  /**
-   * FUNCTIONS
-   * =========
-   *
-   * Now we're getting into function decorators, which take in any function
-   * and return out a new version of the function that works somewhat differently
-   */
-
-  // Return a function that can be called at most one time. Subsequent calls
-  // should return the previously returned value.
   _.once = function(func) {
-    // TIP: These variables are stored in a "closure scope" (worth researching),
-    // so that they'll remain available to the newly-generated function every
-    // time it's called.
     var alreadyCalled = false;
     var result;
 
-    // TIP: We'll return a new function that delegates to the old one, but only
-    // if it hasn't been called before.
     return function() {
       if (!alreadyCalled) {
-        // TIP: .apply(this, arguments) is the standard way to pass on all of the
-        // infromation from one function call to another.
         result = func.apply(this, arguments);
         alreadyCalled = true;
       }
-      // The new function always returns the originally computed result.
       return result;
     };
   };
 
-  // Memorize an expensive function's results by storing them. You may assume
-  // that the function only takes primitives as arguments.
-  // memoize could be renamed to oncePerUniqueArgumentList; memoize does the
-  // same thing as once, but based on many sets of unique arguments.
-  //
-  // _.memoize should return a function that, when called, will check if it has
-  // already computed the result for the given argument and return that value
-  // instead if possible.
   _.memoize = function(func) {
     var calls = {};
     return function() {
@@ -198,12 +171,6 @@
     }
   };
 
-  // Delays a function for the given number of milliseconds, and then calls
-  // it with the arguments supplied.
-  //
-  // The arguments for the original function are passed after the wait
-  // parameter. For example _.delay(someFunction, 500, 'a', 'b') will
-  // call someFunction('a', 'b') after 500ms
   _.delay = function(func, wait) {
     var argsToPass = _.map(arguments, item => item).slice(2);
     return setTimeout(function(){
@@ -211,20 +178,9 @@
     }, wait);
   };
 
-
-  /**
-   * ADVANCED COLLECTION OPERATIONS
-   * ==============================
-   */
-
-  // Randomizes the order of an array's contents.
-  //
-  // TIP: This function's test suite will ask that you not modify the original
-  // input array. For a tip on how to make a copy of an array, see:
-  // http://mdn.io/Array.prototype.slice
   _.shuffle = function(array) {;
     var copy = array.slice();
-    
+
     for (var i = 0; i < copy.length - 1; i++) {
       var random = Math.floor(Math.random() * copy.length - i);
       var destination = copy.length - 1 - i;

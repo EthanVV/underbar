@@ -180,18 +180,14 @@
 
   _.shuffle = function(array) {;
     var copy = array.slice();
-
-    for (var i = 0; i < copy.length - 1; i++) {
-      var random = Math.floor(Math.random() * copy.length - i);
-      var destination = copy.length - 1 - i;
-      var holder = copy[destination]
-
-      copy[destination] = copy[random];
-      copy[random] = holder;
+    for (var i = copy.length - 1; i > 0; i--) {
+      var random = Math.floor(Math.random() * (i + 1));
+      var temp = copy[i];
+      copy[i] = copy[random];
+      copy[random] = temp;
     }
     return copy;
   };
-
 
   /**
    * ADVANCED
